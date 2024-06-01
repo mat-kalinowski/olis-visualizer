@@ -18,17 +18,6 @@ fastify.get('/', async function handler (request, reply) {
     sort_type: "position",
     sort_order: "asc",
   };
-
-  let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://www.olis.pl/api/search',
-    headers: { 
-      'referer': 'https://www.olis.pl/charts/oficjalna-lista-sprzedazy/albumy', 
-      'Content-Type': 'application/json'
-    },
-    data : data
-  };
   var response_data = await got.post({
     url: 'https://www.olis.pl/api/search',
     headers: { 
@@ -38,7 +27,6 @@ fastify.get('/', async function handler (request, reply) {
     json: data,
   })
 
-  console.log("before return")
   return { data: response_data.body }
 })
 
